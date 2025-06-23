@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa';
-
+import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
+  base: './', // ✅ Ensures proper asset loading after deployment
   plugins: [
     tailwindcss(),
     react(),
@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'logo192.png'],
       manifest: {
-        name: 'BusGo - Bus Booking App',
+        name: 'TripEase- Bus Booking App',
         short_name: 'BusGo',
         description: 'Book your bus tickets easily',
         theme_color: '#2563eb',
