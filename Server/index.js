@@ -20,7 +20,7 @@ const startServer = async () => {
 
   // CORS policy
   const corsOptions = {
-    origin: 'http://localhosh:5173',       // allow all here; tighten in production
+    origin: 'https://bus-booking-app-1-u664.onrender.com',       // allow all here; tighten in production
     credentials: true,
     methods: ['GET','POST','DELETE','PUT']
   };
