@@ -6,7 +6,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'; // ✅ Fixed import
 // import { FcGoogle } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../redux/userSlice';
+import { loginSuccess } from '../redux_temp/userSlice';
 
 export default function Login() {
   const dispatch = useDispatch();

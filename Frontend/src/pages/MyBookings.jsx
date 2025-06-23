@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import BookingTabs from "../components/BookingTabs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setmybookingResults } from "../redux/mybookingslice";
+import { setmybookingResults } from "../redux_temp/mybookingslice";
 
 export default function MyBookings() {
   const bookings = useSelector((state)=> state.mybooking.results)

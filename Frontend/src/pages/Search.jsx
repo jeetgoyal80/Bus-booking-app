@@ -3,7 +3,7 @@ import SearchResults from '../components/SearchForm';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchResults } from '../redux/Searchbusslice';
+import { setSearchResults } from '../redux_temp/Searchbusslice';
 import { toast } from 'react-toastify';
 import CheckPNR from '../components/CheckPNR';
 
