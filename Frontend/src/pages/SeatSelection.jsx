@@ -15,7 +15,7 @@ export default function SeatSelection() {
   useEffect(() => {
     async function fetchBusSeats() {
       try {
-        const res = await axios.get(`http://localhost:5000/bus/${busId}`, {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/bus/${busId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

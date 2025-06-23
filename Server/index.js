@@ -6,43 +6,66 @@ import busRoutes from './routes/bus.js';
 import ticketRoutes from './routes/ticket.js';
 import supportRoute from './routes/support.js';
 import { buildAdminJS } from './utils/setup.js';
+
+import { fileURLToPath } from 'url';
+import path from 'path';
 import morgan from 'morgan';
+
+// Recreate __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
 
 const startServer = async () => {
   const app = express();
 
+  // CORS policy
   const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: '*',       // allow all here; tighten in production
     credentials: true,
-    methods: ['GET', 'POST', 'DELETE', 'PUT']
+    methods: ['GET','POST','DELETE','PUT']
   };
 
-
-  // Connect to DB
+  // Connect to MongoDB
   await connectDB();
 
   // AdminJS
   await buildAdminJS(app);
 
-  // Middleware
+  // Middlewares
   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(morgan('dev'));
-  
 
-  // Routes
-  app.use('/user', userRoutes);
-  app.use('/bus', busRoutes);
+  // API Routes
+  app.use('/user',    userRoutes);
+  app.use('/bus',     busRoutes);
   app.use('/tickets', ticketRoutes);
-  app.use('/',supportRoute );
+  app.use('/support', supportRoute);
 
-  app.get('/', (req, res) => {
-    res.send('🚍 Bus Booking API Running');
-  });
+  // Serve React build
+// Serve static assets
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
-  // Optional: Set COOP headers if using OAuth popups
+// Fallback: for any GET request that hasn't hit an API or AdminJS route,
+// send back React's index.html
+app.use((req, res, next) => {
+  // Only handle GET requests for non-API/AdminJS paths
+  if (req.method === 'GET'
+    && !req.path.startsWith('/user')
+    && !req.path.startsWith('/bus')
+    && !req.path.startsWith('/tickets')
+    && !req.path.startsWith('/support')
+    && !req.path.startsWith('/admin')) {
+    return res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
+  }
+  next();
+});
+
+  // });
+
+  // Security headers (COOP/COEP) for OAuth popups, etc.
   app.use((req, res, next) => {
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Opener-Policy',    'same-origin');
     res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
     next();
   });
@@ -50,7 +73,7 @@ const startServer = async () => {
   // Start server
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server started on port ${PORT}`);
+    console.log(`🚀 Server started at http://localhost:${PORT}`);
   });
 };
 

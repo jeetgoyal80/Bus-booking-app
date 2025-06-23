@@ -6,7 +6,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'; // ✅ Fixed import
 // import { FcGoogle } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../redux/userSlice';
+import { loginSuccess } from '../temp_redux/userSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -117,7 +117,7 @@ export default function Login() {
 
 
         <p className="text-center text-sm text-gray-500">
-          Don't have an account?{' '}
+          Do not have an account?{' '}
           <span
             onClick={() => navigate('/signup')}
             className="text-blue-600 cursor-pointer hover:underline"

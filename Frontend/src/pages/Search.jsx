@@ -3,7 +3,7 @@ import SearchResults from '../components/SearchForm';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchResults } from '../redux/Searchbusslice';
+import { setSearchResults } from '../temp_redux/Searchbusslice';
 import { toast } from 'react-toastify';
 import CheckPNR from '../components/CheckPNR';
 
@@ -41,7 +41,7 @@ export default function Search() {
       setLoading(true);
       const token = localStorage.getItem('token');
       const res = await axios.post(
-       `${import.meta.env.VITE_BACKEND_URL}/search`,
+       `${import.meta.env.VITE_BACKEND_URL}/bus/search`,
         { from, to, date },
         {
           headers: {

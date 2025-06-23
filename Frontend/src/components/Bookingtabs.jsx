@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BookingCard from "./BookingCard";
+import PropTypes from 'prop-types';
 
 export default function BookingTabs({ bookings }) {
   const [activeTab, setActiveTab] = useState("Upcoming");
@@ -35,3 +36,10 @@ export default function BookingTabs({ bookings }) {
     </div>
   );
 }
+
+BookingTabs.propTypes = {
+  bookings: PropTypes.arrayOf(PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    // add other fields as needed (id, date, etc.)
+  })).isRequired,
+};

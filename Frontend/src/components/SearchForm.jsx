@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { FaBusAlt, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +47,6 @@ export default function SearchResults({ results, loading }) {
             transition={{ duration: 0.3 }}
           >
             <div className="flex justify-between items-center mb-2">
-              {/* Left: Company & Bus Info */}
               <div className="flex items-center gap-3">
                 <FaBusAlt className="text-blue-600 text-xl" />
                 <div>
@@ -59,7 +59,6 @@ export default function SearchResults({ results, loading }) {
                 </div>
               </div>
 
-              {/* Rating */}
               {bus.rating && (
                 <div className="flex items-center text-sm text-yellow-500 font-medium">
                   <FaStar className="mr-1" />
@@ -69,7 +68,6 @@ export default function SearchResults({ results, loading }) {
             </div>
 
             <div className="flex justify-between items-center mt-3">
-              {/* Time */}
               <div className="text-gray-700 text-sm">
                 <p>
                   <span className="font-medium">Departure:</span>{" "}
@@ -81,16 +79,13 @@ export default function SearchResults({ results, loading }) {
                 </p>
               </div>
 
-              {/* Price & Button */}
               <div className="text-right">
                 {bus.originalPrice && bus.originalPrice > bus.price && (
                   <p className="text-sm text-gray-500 line-through">
                     ₹{bus.originalPrice}
                   </p>
                 )}
-                <p className="text-blue-700 text-xl font-bold">
-                  ₹{bus.price}
-                </p>
+                <p className="text-blue-700 text-xl font-bold">₹{bus.price}</p>
                 {discount > 0 && (
                   <p className="text-green-600 text-sm font-medium">
                     {discount}% OFF
@@ -110,3 +105,22 @@ export default function SearchResults({ results, loading }) {
     </div>
   );
 }
+
+// ✅ Add prop-types validation
+SearchResults.propTypes = {
+  results: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      company: PropTypes.string.isRequired,
+      from: PropTypes.string.isRequired,
+      to: PropTypes.string.isRequired,
+      busType: PropTypes.string,
+      departureTime: PropTypes.string,
+      arrivalTime: PropTypes.string,
+      price: PropTypes.number.isRequired,
+      originalPrice: PropTypes.number,
+      rating: PropTypes.number,
+    })
+  ).isRequired,
+  loading: PropTypes.bool.isRequired,
+};

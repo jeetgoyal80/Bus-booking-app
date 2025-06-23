@@ -28,7 +28,7 @@ const SupportForm = () => {
 
     try {
        await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/send`,
+        `${import.meta.env.VITE_BACKEND_URL}/support/send`,
         { userNumber: cleanPhone, message: msg },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
