@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Loading from './pages/Loading';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Search from './pages/Search';
-import SeatSelection from './pages/SeatSelection';
-import MyBookings from './pages/MyBookings';
 import Navbar from './components/Navbar';
+import Loading from './pages/Loading';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TicketConfirm from './pages/TicketConfirm';
-import TicketSuccess from './pages/TicketSuccess';
-import SupportForm from './pages/SupportForm';
+
+// 🐢 Lazy-loaded components
+const Login = React.lazy(() => import('./pages/Login'));
+const Signup = React.lazy(() => import('./pages/Signup'));
+const Search = React.lazy(() => import('./pages/Search'));
+const MyBookings = React.lazy(() => import('./pages/MyBookings'));
+const SeatSelection = React.lazy(() => import('./pages/SeatSelection'));
+const TicketConfirm = React.lazy(() => import('./pages/TicketConfirm'));
+const TicketSuccess = React.lazy(() => import('./pages/TicketSuccess'));
+const SupportForm = React.lazy(() => import('./pages/SupportForm'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
+    const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,17 +31,19 @@ export default function App() {
       ) : (
         <>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Search />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/my-bookings" element={<MyBookings />} />
-            <Route path="/seats/:id" element={<SeatSelection />} />
-            <Route path="/ticket-confirm" element={<TicketConfirm />} />
-            <Route path="/ticket-success" element={<TicketSuccess />} />
-            <Route path="/support" element={<SupportForm />} />
-          </Routes>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Search />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/my-bookings" element={<MyBookings />} />
+              <Route path="/seats/:id" element={<SeatSelection />} />
+              <Route path="/ticket-confirm" element={<TicketConfirm />} />
+              <Route path="/ticket-success" element={<TicketSuccess />} />
+              <Route path="/support" element={<SupportForm />} />
+            </Routes>
+          </Suspense>
         </>
       )}
     </BrowserRouter>

@@ -1,18 +1,17 @@
 // src/redux/busSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   results: [], // array of found buses
 };
 
 const mybookingbusSlice = createSlice({
-  name: 'bus',
+  name: "bus",
   initialState,
   reducers: {
     setmybookingResults: (state, action) => {
       state.results = action.payload; // payload should be an array of bus objects
-    }
-    
+    },
   },
 });
 

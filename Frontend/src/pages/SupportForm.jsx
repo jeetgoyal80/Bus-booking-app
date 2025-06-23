@@ -19,7 +19,7 @@ const SupportForm = () => {
     setLoading(true);
     setStatus("");
 
-    const cleanPhone = phone.replace(/\D/g, '').slice(-10);
+    const cleanPhone = phone.replace(/\D/g, "").slice(-10);
     if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
       setStatus("❌ Please enter a valid 10-digit Indian WhatsApp number.");
       setLoading(false);
@@ -27,13 +27,13 @@ const SupportForm = () => {
     }
 
     try {
-       await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/support/send`,
         { userNumber: cleanPhone, message: msg },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           withCredentials: true,
-        }
+        },
       );
 
       setStatus("✅ Your message has been sent via WhatsApp!");
@@ -51,10 +51,13 @@ const SupportForm = () => {
     <div className="max-w-5xl mx-auto p-6 mt-10 flex flex-col md:flex-row items-start gap-10 bg-white shadow-xl rounded-xl border border-gray-200">
       {/* Left Side (Illustration & Text) */}
       <div className="w-full md:w-1/2 space-y-5">
-        <h2 className="text-3xl font-bold text-blue-700">Contact Customer Support</h2>
+        <h2 className="text-3xl font-bold text-blue-700">
+          Contact Customer Support
+        </h2>
         <p className="text-gray-600">
-          Our support team is here to help with any issues related to your bookings, tickets,
-          or payments. Just drop us a message and we’ll get back to you on WhatsApp!
+          Our support team is here to help with any issues related to your
+          bookings, tickets, or payments. Just drop us a message and we’ll get
+          back to you on WhatsApp!
         </p>
         <img
           src="https://cdn-icons-png.flaticon.com/512/4760/4760908.png"
@@ -67,7 +70,9 @@ const SupportForm = () => {
       <form onSubmit={handleSubmit} className="w-full md:w-1/2 space-y-5">
         {/* Email */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Your Email</label>
+          <label className="block text-sm font-semibold text-gray-700">
+            Your Email
+          </label>
           <input
             type="email"
             value={email}
@@ -78,7 +83,9 @@ const SupportForm = () => {
 
         {/* WhatsApp Number */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">WhatsApp Number</label>
+          <label className="block text-sm font-semibold text-gray-700">
+            WhatsApp Number
+          </label>
           <input
             type="tel"
             value={phone}
@@ -87,12 +94,16 @@ const SupportForm = () => {
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-          <p className="text-xs text-gray-400 mt-1">Please enter a valid 10-digit Indian number.</p>
+          <p className="text-xs text-gray-400 mt-1">
+            Please enter a valid 10-digit Indian number.
+          </p>
         </div>
 
         {/* Message */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Your Message</label>
+          <label className="block text-sm font-semibold text-gray-700">
+            Your Message
+          </label>
           <textarea
             value={msg}
             onChange={(e) => setMsg(e.target.value)}

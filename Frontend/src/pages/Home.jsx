@@ -1,12 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import SearchForm from '../components/SearchForm';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   const navigate = useNavigate();
   const handleSearch = (filters) => {
     // navigate to results with state or query params
-    navigate(`/search?from=${filters.from}&to=${filters.to}&date=${filters.date}`);
+    navigate(
+      `/search?from=${filters.from}&to=${filters.to}&date=${filters.date}`,
+    );
   };
 
   return (

@@ -20,7 +20,7 @@ const startServer = async () => {
 
   // CORS policy
   const corsOptions = {
-    origin: '*',       // allow all here; tighten in production
+    origin: 'http://localhosh:5173',       // allow all here; tighten in production
     credentials: true,
     methods: ['GET','POST','DELETE','PUT']
   };

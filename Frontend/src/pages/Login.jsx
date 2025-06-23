@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode'; // ✅ Fixed import
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode"; // ✅ Fixed import
 // import { FcGoogle } from 'react-icons/fc';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../temp_redux/userSlice';
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../temp_redux/userSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -19,16 +19,19 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/login`, { email, password });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+        { email, password },
+      );
       const { token, user } = res.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       console.log(user);
-      dispatch(loginSuccess({ user: user, token: token }));      
-      navigate('/search');
+      dispatch(loginSuccess({ user: user, token: token }));
+      navigate("/search");
     } catch (err) {
-      alert(err.response?.data?.message || 'Login failed!');
+      alert(err.response?.data?.message || "Login failed!");
     } finally {
       setLoading(false);
     }
@@ -39,17 +42,20 @@ export default function Login() {
       const decoded = jwtDecode(credentialResponse.credential); // ✅ Correct usage
       const { email, sub: googleId } = decoded;
 
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
-        email,
-        googleId,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+        {
+          email,
+          googleId,
+        },
+      );
 
       const { token, user } = res.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      navigate('/search');
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/search");
     } catch (error) {
-      alert(error.response?.data?.message || 'Google login failed!');
+      alert(error.response?.data?.message || "Google login failed!");
     }
   };
 
@@ -62,7 +68,9 @@ export default function Login() {
         transition={{ duration: 0.4 }}
         className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl space-y-6"
       >
-        <h2 className="text-3xl font-bold text-center text-blue-700">Welcome Back!</h2>
+        <h2 className="text-3xl font-bold text-center text-blue-700">
+          Welcome Back!
+        </h2>
 
         <div>
           <label className="block mb-1 font-medium text-gray-700">Email</label>
@@ -77,7 +85,9 @@ export default function Login() {
         </div>
 
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Password</label>
+          <label className="block mb-1 font-medium text-gray-700">
+            Password
+          </label>
           <input
             type="password"
             required
@@ -91,12 +101,13 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full py-3 rounded-md font-semibold transition ${loading
-              ? 'bg-blue-300 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}
+          className={`w-full py-3 rounded-md font-semibold transition ${
+            loading
+              ? "bg-blue-300 cursor-not-allowed"
+              : "bg-blue-600 text-white hover:bg-blue-700"
+          }`}
         >
-          {loading ? 'Signing in...' : 'Sign In'}
+          {loading ? "Signing in..." : "Sign In"}
         </button>
 
         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm">
@@ -108,18 +119,17 @@ export default function Login() {
         <div className="flex justify-center mt-4">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
-            onError={() => alert('Google Login Failed')}
+            onError={() => alert("Google Login Failed")}
             shape="pill"
             theme="outline"
             width="250"
           />
         </div>
 
-
         <p className="text-center text-sm text-gray-500">
-          Do not have an account?{' '}
+          Do not have an account?{" "}
           <span
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate("/signup")}
             className="text-blue-600 cursor-pointer hover:underline"
           >
             Sign up

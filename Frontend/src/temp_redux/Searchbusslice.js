@@ -1,12 +1,12 @@
 // src/redux/busSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   results: [], // array of found buses
 };
 
 const busSlice = createSlice({
-  name: 'bus',
+  name: "bus",
   initialState,
   reducers: {
     setSearchResults: (state, action) => {
@@ -14,7 +14,7 @@ const busSlice = createSlice({
     },
     clearSearchResults: (state) => {
       state.results = [];
-    }
+    },
   },
 });
 

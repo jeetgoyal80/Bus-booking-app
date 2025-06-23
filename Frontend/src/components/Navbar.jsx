@@ -11,7 +11,6 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       const token = localStorage.getItem("token");
@@ -47,7 +46,10 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2 text-blue-700 font-bold text-xl">
+        <Link
+          to="/"
+          className="flex items-center gap-2 text-blue-700 font-bold text-xl"
+        >
           <FaBusAlt /> TripEase
         </Link>
 
@@ -76,7 +78,7 @@ export default function Navbar() {
               >
                 {icon} {name}
               </Link>
-            )
+            ),
           )}
         </div>
 
@@ -127,7 +129,7 @@ export default function Navbar() {
                   >
                     {icon} {name}
                   </Link>
-                )
+                ),
               )}
             </div>
           </motion.div>

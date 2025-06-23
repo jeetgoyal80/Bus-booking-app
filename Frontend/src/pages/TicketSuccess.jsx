@@ -29,8 +29,16 @@ export default function TicketSuccess() {
     doc.text(`Email: ${ticket.user?.email || "N/A"}`, 14, 47);
     doc.text(`PNR: ${ticket.pnr}`, 14, 54);
     doc.text(`Status: ${ticket.status}`, 14, 61);
-    doc.text(`Booked At: ${new Date(ticket.bookedAt).toLocaleString()}`, 14, 68);
-    doc.text(`Travel Date: ${new Date(ticket.date).toLocaleDateString()}`, 14, 75);
+    doc.text(
+      `Booked At: ${new Date(ticket.bookedAt).toLocaleString()}`,
+      14,
+      68,
+    );
+    doc.text(
+      `Travel Date: ${new Date(ticket.date).toLocaleDateString()}`,
+      14,
+      75,
+    );
 
     // Seats and Fare
     autoTable(doc, {
@@ -46,7 +54,9 @@ export default function TicketSuccess() {
         head: [["Bus Information"]],
         body: [
           [`Bus Name: ${ticket?.bus?.busId || "N/A"}`],
-          [`From: ${ticket?.bus?.from || "N/A"} → To: ${ticket.bus.to || "N/A"}`],
+          [
+            `From: ${ticket?.bus?.from || "N/A"} → To: ${ticket.bus.to || "N/A"}`,
+          ],
           [`Bus Number: ${ticket.bus.busNumber || "N/A"}`],
         ],
       });
@@ -63,7 +73,7 @@ export default function TicketSuccess() {
     doc.text(
       "Note: Please carry a valid ID proof during travel. This ticket is non-refundable.",
       14,
-      280
+      280,
     );
 
     doc.save(`Ticket_${ticket.pnr}.pdf`);
@@ -73,16 +83,36 @@ export default function TicketSuccess() {
 
   return (
     <div className="min-h-screen bg-green-50 p-6 flex flex-col items-center">
-      <h2 className="text-3xl font-bold text-green-700 mb-4">Booking Successful!</h2>
+      <h2 className="text-3xl font-bold text-green-700 mb-4">
+        Booking Successful!
+      </h2>
       <div className="bg-white shadow p-6 rounded w-full max-w-md text-gray-800">
-        <p><strong>PNR:</strong> {ticket.pnr}</p>
-        <p><strong>Seats:</strong> {ticket.seatNumbers.join(", ")}</p>
-        <p><strong>Total Fare:</strong> ₹{ticket.totalFare}</p>
-        <p><strong>Status:</strong> {ticket.status}</p>
-        <p><strong>Booked At:</strong> {new Date(ticket.bookedAt).toLocaleString()}</p>
-        <p><strong>Travel Date:</strong> {new Date(ticket.date).toLocaleDateString()}</p>
-        <p><strong>Passenger:</strong> {ticket.user?.name}</p>
-        <p><strong>Email:</strong> {ticket.user?.email}</p>
+        <p>
+          <strong>PNR:</strong> {ticket.pnr}
+        </p>
+        <p>
+          <strong>Seats:</strong> {ticket.seatNumbers.join(", ")}
+        </p>
+        <p>
+          <strong>Total Fare:</strong> ₹{ticket.totalFare}
+        </p>
+        <p>
+          <strong>Status:</strong> {ticket.status}
+        </p>
+        <p>
+          <strong>Booked At:</strong>{" "}
+          {new Date(ticket.bookedAt).toLocaleString()}
+        </p>
+        <p>
+          <strong>Travel Date:</strong>{" "}
+          {new Date(ticket.date).toLocaleDateString()}
+        </p>
+        <p>
+          <strong>Passenger:</strong> {ticket.user?.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {ticket.user?.email}
+        </p>
       </div>
 
       <button

@@ -15,12 +15,15 @@ export default function SeatSelection() {
   useEffect(() => {
     async function fetchBusSeats() {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/bus/${busId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/bus/${busId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        });
+        );
         const seatData = res.data.seats;
         setSeats(seatData);
         setBusDetails(res.data); // entire bus object
@@ -36,7 +39,7 @@ export default function SeatSelection() {
 
   const toggleSeat = (id) => {
     setSelected((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
   };
 
@@ -117,9 +120,7 @@ export default function SeatSelection() {
                 </motion.div>
               ))}
             </div>
-
             <div className="w-10" /> {/* Aisle gap */}
-
             {/* Right Side */}
             <div className="flex gap-2">
               {rowSeats.slice(2).map((seat) => (

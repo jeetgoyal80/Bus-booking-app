@@ -35,7 +35,9 @@ export default function SearchResults({ results, loading }) {
       {results.map((bus) => {
         const discount =
           bus.originalPrice && bus.originalPrice > bus.price
-            ? Math.round(((bus.originalPrice - bus.price) / bus.originalPrice) * 100)
+            ? Math.round(
+                ((bus.originalPrice - bus.price) / bus.originalPrice) * 100,
+              )
             : 0;
 
         return (
@@ -120,7 +122,7 @@ SearchResults.propTypes = {
       price: PropTypes.number.isRequired,
       originalPrice: PropTypes.number,
       rating: PropTypes.number,
-    })
+    }),
   ).isRequired,
   loading: PropTypes.bool.isRequired,
 };

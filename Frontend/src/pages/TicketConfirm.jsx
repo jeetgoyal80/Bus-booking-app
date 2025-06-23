@@ -6,15 +6,14 @@ import { useSelector } from "react-redux";
 export default function TicketConfirm() {
   const location = useLocation();
   const navigate = useNavigate();
-  
-  const token = localStorage.getItem('token');
-  const user = useSelector((state)=> state.user.token);
+
+  const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.user.token);
   console.log(user);
-  
-  
+
   const { selectedSeats, busDetails, travelDate } = location.state || {};
-  
-//   console.log(busDetails);
+
+  //   console.log(busDetails);
   const totalFare = selectedSeats.length * busDetails.price;
 
   const handleConfirmBooking = async () => {
@@ -30,7 +29,7 @@ export default function TicketConfirm() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (res.data.success) {
@@ -46,15 +45,30 @@ export default function TicketConfirm() {
 
   return (
     <div className="min-h-screen bg-white p-6 text-gray-800">
-      <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">Ticket Confirmation</h2>
+      <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">
+        Ticket Confirmation
+      </h2>
 
       <div className="max-w-xl mx-auto bg-gray-100 p-4 rounded shadow">
-        <p><strong>Bus:</strong> {busDetails.busName} ({busDetails.busId})</p>
-        <p><strong>From:</strong> {busDetails.from} <strong>To:</strong> {busDetails.to}</p>
-        <p><strong>Date:</strong> {travelDate}</p>
-        <p><strong>Seats:</strong> {selectedSeats.join(", ")}</p>
-        <p><strong>Fare per seat:</strong> ₹{busDetails.price}</p>
-        <p className="text-lg font-semibold mt-2 text-green-700">Total Fare: ₹{totalFare}</p>
+        <p>
+          <strong>Bus:</strong> {busDetails.busName} ({busDetails.busId})
+        </p>
+        <p>
+          <strong>From:</strong> {busDetails.from} <strong>To:</strong>{" "}
+          {busDetails.to}
+        </p>
+        <p>
+          <strong>Date:</strong> {travelDate}
+        </p>
+        <p>
+          <strong>Seats:</strong> {selectedSeats.join(", ")}
+        </p>
+        <p>
+          <strong>Fare per seat:</strong> ₹{busDetails.price}
+        </p>
+        <p className="text-lg font-semibold mt-2 text-green-700">
+          Total Fare: ₹{totalFare}
+        </p>
 
         <button
           onClick={handleConfirmBooking}

@@ -22,9 +22,7 @@ export default function BookingCard({ booking }) {
           <h3 className="font-semibold text-lg">
             {booking?.bus?.from}-{booking?.bus?.to}
           </h3>
-          <p className="text-gray-500 text-sm">
-            {booking.date.split("T")[0]}
-          </p>
+          <p className="text-gray-500 text-sm">{booking.date.split("T")[0]}</p>
           <p className="text-gray-600 text-sm">
             Seat No: {booking.seatNumbers.join(",")}
           </p>

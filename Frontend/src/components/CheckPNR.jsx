@@ -22,7 +22,7 @@ const CheckPNR = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/tickets/pnr`,
-        { pnr: pnr.trim().toUpperCase() }
+        { pnr: pnr.trim().toUpperCase() },
       );
 
       setTicket(response.data.ticket);
@@ -62,12 +62,24 @@ const CheckPNR = () => {
 
       {ticket && (
         <div className="mt-6 bg-gray-50 p-4 rounded-lg shadow-sm border">
-          <h3 className="text-lg font-semibold text-blue-700 mb-2">🎫 Ticket Details</h3>
-          <p><strong>PNR:</strong> {ticket.pnr}</p>
-          <p><strong>Status:</strong> {ticket.status.toUpperCase()}</p>
-          <p><strong>Route:</strong> {ticket.bus?.from} → {ticket.bus?.to}</p>
-          <p><strong>Time:</strong> {ticket.bus?.departureTime}</p>
-          <p><strong>Date:</strong> {ticket.date.split('T')[0]}</p>
+          <h3 className="text-lg font-semibold text-blue-700 mb-2">
+            🎫 Ticket Details
+          </h3>
+          <p>
+            <strong>PNR:</strong> {ticket.pnr}
+          </p>
+          <p>
+            <strong>Status:</strong> {ticket.status.toUpperCase()}
+          </p>
+          <p>
+            <strong>Route:</strong> {ticket.bus?.from} → {ticket.bus?.to}
+          </p>
+          <p>
+            <strong>Time:</strong> {ticket.bus?.departureTime}
+          </p>
+          <p>
+            <strong>Date:</strong> {ticket.date.split("T")[0]}
+          </p>
         </div>
       )}
     </div>
