@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBusAlt, FaBars, FaTimes, FaHeadset } from "react-icons/fa"; // added headset icon
-import { logout } from "../Redux/userSlice";
+import { logout } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { persistor } from "../redux/store";
 import { toast } from "react-toastify";

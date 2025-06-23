@@ -4,7 +4,7 @@ import App from './App.jsx';
 import './index.css';
 
 import { Provider } from 'react-redux';
-import { store, persistor } from './redux/store';
+import { store, persistor } from './redux/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ToastContainer } from 'react-toastify';
